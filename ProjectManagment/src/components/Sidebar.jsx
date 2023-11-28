@@ -8,7 +8,19 @@ export default function Sidebar({onstartAddProject, projects}){
              onClick={onstartAddProject}>
                 +Add Project
             </button>
+            <h3 className="px-1 py-8 mb-8 font-bold uppercase md:text-xl text-stone-200">Your Projects</h3>
+            <ul className="mt-8">
+                {projects.map((project=> 
+                    <li key={project.id}>
+                        <button className="px-4 py-2 text-xs md:text-base rounded-md bg-green-700 text-white  hover:text-red-600">
+                            {project.title}
+                        </button>
+                    </li>
+                    ))
+                }
+                   
 
+            </ul>
         </aside>
     );
 }
