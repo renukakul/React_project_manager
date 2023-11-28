@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { ForwardedRef } from "react";
+
 
 
 const Input = forwardRef(function Input ({label, ...props},ref){
