@@ -3,7 +3,7 @@ import { useRef } from "react";
 import Input from "./Input.jsx";
 import Modal from "./Modal.jsx";
 
-export default function AddProject({onAdd}){
+export default function AddProject({onAdd, onCancel}){
 
     const modal = useRef();
 
@@ -38,7 +38,8 @@ export default function AddProject({onAdd}){
             <div className="w-[35rem] mt-16"> 
                 <menu className="flex items-center justify-end gap-4 my-4">
                     <li>
-                        <button className="px-6 py-2 rounded-md bg-gray-300 hover:text-white">
+                        <button className="px-6 py-2 rounded-md bg-gray-300 hover:text-white"
+                        onClick={onCancel}>
                             Cancel
                         </button>
                     </li>
