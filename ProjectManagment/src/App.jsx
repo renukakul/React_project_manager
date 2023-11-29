@@ -63,11 +63,36 @@ function App() {
     });
   }
 
-  
+  function handleAddTask(text) {
+    setProjectState((prevState) => {
+      const taskId = Math.random();
+      const newTask = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+
+      return {
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks],
+      };
+    });
+  }
+
+  function handleClearTask(id) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== id),
+      };
+    });
+  }
 
   const selectedProject = projectState.projects.find(project => project.id === projectState.selectedProjectId);
+  
+  const selectedProjectTask = projectState.tasks.filter(task => task.projectId === projectState.selectedProjectId);
 
-  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} onAddTask={handleAddTask} onDeleteTask= {handleDeleteTask}/>;
+  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} onAddTask={handleAddTask} onDeleteTask= {handleClearTask} tasks={selectedProjectTask}/>;
 
   if (projectState.selectedProjectId === null) {
     content = <AddProject onAdd={handleAddProjectDetails} onCancel={handleCancelButton} />;
@@ -77,7 +102,7 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <Sidebar onstartAddProject={handleAddProjectButton} projects={projectState.projects} onSelectProject={handleSelectProject} />
+      <Sidebar onstartAddProject={handleAddProjectButton} projects={projectState.projects} onSelectProject={handleSelectProject} selectedProjectId={projectState.selectedProjectId} tasks={projectState.tasks} />
       {content}
     </main>
 
