@@ -11,7 +11,6 @@ export default function({onStartAddProject}){
                 onClick={onStartAddProject}>
                     Create New Project
                 </button>
-
             </p>
         </div>
     )

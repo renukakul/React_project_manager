@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar";
 import SelectedProject from "./components/SelectProject";
 
 function App() {
-  const [projectState, setProjectState] =useState({selectedProjectId :undefined, projects :[]});
+  const [projectState, setProjectState] =useState({selectedProjectId :undefined, projects :[], tasks : []});
 
   function handleAddProjectButton(){
     setProjectState(prevState=>{
@@ -51,13 +51,23 @@ function App() {
     })
   }
 
+  function handleDeleteProject() {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  }
+
   
-
-
 
   const selectedProject = projectState.projects.find(project => project.id === projectState.selectedProjectId);
 
-  let content = <SelectedProject project={selectedProject}/>;
+  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} onAddTask={handleAddTask} onDeleteTask= {handleDeleteTask}/>;
 
   if (projectState.selectedProjectId === null) {
     content = <AddProject onAdd={handleAddProjectDetails} onCancel={handleCancelButton} />;
